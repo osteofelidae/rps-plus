@@ -13,6 +13,8 @@ struct Sign {
 // Implement sign struct
 impl Sign {
 
+    // TODO Function to create one
+
     // Function to compare to another Sign (fight) - return true if self wins (false means undefined or lose)
     fn compare(&self, other: &Sign) -> bool {
 
@@ -73,7 +75,7 @@ impl Sign {
         }
 
         // Set result to whether values exist in invalid list
-        let mut result: bool = !(invalid_signs.len() > 0);
+        let result: bool = !(invalid_signs.len() > 0);
 
         // Return result tuple
         (result, invalid_signs)
