@@ -1,4 +1,5 @@
 // Struct representing a sign
+#[derive(Clone)]
 struct Sign {
 
     // Name of sign
@@ -52,6 +53,33 @@ impl Sign {
 
     }
 
+    // Validate with a vector of signs
+    fn validate_multiple(&self, others: &Vec<Sign>) -> (bool, Vec<Sign>) {
+
+        // Output variables
+        let mut invalid_signs: Vec<Sign> = Vec::new();
+
+        // Iterate through input vector
+        for sign in others {
+
+            // If sign does not validate
+            if !self.validate(sign) {
+
+                // Add to output vector
+                invalid_signs.push(sign.clone());
+
+            }
+
+        }
+
+        // Set result to whether values exist in invalid list
+        let mut result: bool = !(invalid_signs.len() > 0);
+
+        // Return result tuple
+        (result, invalid_signs)
+
+    }
+
 }
 
 // Main function
@@ -61,7 +89,7 @@ fn main() {
     let rock = Sign {
 
         name: String::from("rock"),
-        beats: vec![String::from("scissors")],
+        beats: vec![String::from("scissors"), String::from("paper")],
 
     };
 
@@ -75,12 +103,12 @@ fn main() {
     let scissors = Sign {
 
         name: String::from("scissors"),
-        beats: vec![String::from("paper")],
+        beats: vec![String::from("paper"), String::from("rock")],
 
     };
 
     println!("{}",rock.validate(&paper));
+    let test: Vec<Sign> = vec![paper, scissors];
+    println!("{}, {}",rock.validate_multiple(&test).0, rock.validate_multiple(&test).1[1].name);
 
 }
-
-// test change
